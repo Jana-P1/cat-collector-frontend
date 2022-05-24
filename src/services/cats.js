@@ -64,3 +64,33 @@ export const deleteOne = async (id) => {
     throw err
   }
 }
+
+export const addFeeding = async (id, data) => {
+  try {
+    const res = await fetch(`${BASE_URL}${id}/feedings`, {
+      method: "POST",
+      headers: {
+        'Content-type': "application/json",
+        'Authorization': `Bearer ${tokenService.getToken()}`
+      },
+      body: JSON.stringify(data),
+    })
+    return await res.json()
+  } catch (error) {
+    throw error
+  }
+}
+
+export const assocToy = async (catId, toyId) => {
+  try {
+    const res = await fetch(`${BASE_URL}${catId}/toys/${toyId}`, {
+      method: "LINK",
+      headers: {
+        "Authorization": `Bearer ${tokenService.getToken()}`
+      },
+    }) 
+    return await res.json()
+  } catch (error) {
+    throw error
+  }
+}
